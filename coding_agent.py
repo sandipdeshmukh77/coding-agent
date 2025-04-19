@@ -14,16 +14,19 @@ client = OpenAI(
 
 
 def detect_os():
+  print(f"⛏️ Tool called : : detect_os : None")
   return platform.system()
    
 
 def run_command(command):
+    print(f"⛏️ Tool called : : run_command : {command}")
     try:
         return os.system(command)
     except Exception as e:
         return f"Error: {str(e)}"
 
 def create_file(data):
+    print(f"⛏️ Tool called : : create_file : {data}")
     # Handle both string and dict inputs
 
     file_name = data.get("file_name")
@@ -49,6 +52,7 @@ def create_file(data):
     
 
 def read_file(file_name):
+    print(f"⛏️ Tool called : : read_file : {file_name}")
     try:
         with open(file_name, 'r') as f:
             return f.read()
@@ -56,6 +60,7 @@ def read_file(file_name):
         return f"Error: {str(e)}"
     
 def list_files(directory="."):
+    print(f"⛏️ Tool called : : list_files : {directory}")
     try:
         files = os.listdir(directory)
         return f"Files in {directory}:\n" + "\n".join(files)
@@ -63,6 +68,7 @@ def list_files(directory="."):
         return f"Error: {str(e)}"
 
 def delete_file(file_name):
+    print(f"⛏️ Tool called : : delete_file : {file_name}")
     try:
         os.remove(file_name)
         return f"{file_name} deleted successfully."
@@ -70,6 +76,7 @@ def delete_file(file_name):
         return f"Error: {str(e)}"
 
 def git_command(command):
+    print(f"⛏️ Tool called : : git_command : {command}")
     try:
         output = os.popen(f"git {command}").read()
         return output.strip()
@@ -77,6 +84,7 @@ def git_command(command):
         return f"Error: {str(e)}"
 
 def get_current_directory():
+    print(f"⛏️ Tool called : : get_current_directory : None")
     try:
         current_directory = os.getcwd()
         return f"Current directory: {current_directory}"
@@ -84,6 +92,7 @@ def get_current_directory():
         return f"Error: {str(e)}"
     
 def make_directory(directory):
+    print(f"⛏️ Tool called : : make_directory : {directory}")
     try:
         os.makedirs(directory, exist_ok=True)
         return f"Directory {directory} created successfully."
@@ -134,7 +143,7 @@ available_tools = {
 # System prompt
 system_prompt = """
 You are a helpful AI assistant specialized in writing code for fullstack application.
-You operate in a loop of start → plan → action → observe → output.
+You operate in a loop of start â†’ plan â†’ action â†’ observe â†’ output.
 For the given user query, reason step-by-step and use the available tools as needed.
 
 Rules:
@@ -156,7 +165,7 @@ Rules:
 - For React app creation:
   - use command  that does not require user interaction like `npm create vite@latest my-react-app -- --template react`
   - After creating the app, install dependencies and suggest how to run it
-  - Typical flow for React app: create app → cd into directory → npm install → suggest npm run dev
+  - Typical flow for React app: create app â†’ cd into directory â†’ npm install â†’ suggest npm run dev
 
 
 Available Tools:
@@ -166,7 +175,7 @@ Available Tools:
 - list_files(directory): Lists files in a directory.
 - delete_file(file_name): Deletes a file.
 - git_command(command): Executes Git commands.
-- get_current_directory(): Gets the current working directory.
+- get_current_directory(): Gets the current working directory no input required.
 - detect_os(): Detects the operating system.no input required`
 - make_directory(directory): Creates a new directory.
 
@@ -243,7 +252,7 @@ while True:
         step = parsed_output.get("step")
 
         if step == "plan":
-            print(f"🧠: {parsed_output.get('content')}")
+            print(f"ðŸ§ : {parsed_output.get('content')}")
             continue
 
         if step == "action":
@@ -255,7 +264,7 @@ while True:
                 except:
                     pass
             if tool_name in available_tools:
-                result = available_tools[tool_name]["fn"](tool_input)
+                result = available_tools[tool_name]["fn"]() if tool_input is None else available_tools[tool_name]["fn"](tool_input)
                 messages.append({
                     "role": "assistant",
                     "content": json.dumps({ "step": "observe", "content": result })
@@ -263,5 +272,5 @@ while True:
                 continue
 
         if step == "output":
-            print(f"🤖: {parsed_output.get('content')}")
+            print(f"ðŸ¤–: {parsed_output.get('content')}")
             break

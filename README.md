@@ -71,3 +71,41 @@ Contributions are welcome! To contribute:
 2.  Create a new branch for your feature or bug fix.
 3.  Implement your changes.
 4.  Submit a pull request.
+
+## Batch File Usage
+
+This project includes a batch file (`run_script.bat`) to automate common tasks. Here's how to use it:
+
+1.  **Locate the Batch File:** Find the `run_script.bat` file in the project directory.
+2.  **Open Command Prompt:** Open the Command Prompt (or Terminal on macOS/Linux).
+3.  **Navigate to the Project Directory:** Use the `cd` command to navigate to the directory containing the batch file.
+    ```bash
+    cd path/to/your/project
+    ```
+4.  **Execute the Batch File:** Run the batch file by typing its name and pressing Enter.
+    ```bash
+    run_script.bat
+    ```
+5.  **Follow On-Screen Instructions:** The batch file might prompt you for input or display messages as it executes.
+
+## Advantages of Using Batch Files
+
+*   **Automation:** Batch files automate repetitive tasks, saving time and effort.
+*   **Efficiency:** They execute a series of commands sequentially, ensuring consistency.
+*   **Simplicity:** Batch files are easy to create and modify, even for users with limited programming experience.
+*   **Customization:** You can tailor batch files to specific needs and workflows.
+
+## Example `run_script.bat` Content
+```batch
+@echo off
+echo Running a sample task...
+echo Creating a directory named 'output'...
+mkdir output
+echo Done.
+pause
+```
+
+## Notes
+
+*   Ensure you have the necessary permissions to execute batch files.
+*   Modify the batch file to suit your specific requirements.
