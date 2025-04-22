@@ -13,7 +13,7 @@ client = OpenAI(
 # Tool functions
 
 
-def detect_os():
+def detect_os(system=None):
   print(f"⛏️ Tool called : : detect_os : None")
   return platform.system()
    
@@ -83,7 +83,8 @@ def git_command(command):
     except Exception as e:
         return f"Error: {str(e)}"
 
-def get_current_directory():
+def get_current_directory(directory=None):
+    # No input required for this function
     print(f"⛏️ Tool called : : get_current_directory : None")
     try:
         current_directory = os.getcwd()
@@ -264,7 +265,7 @@ while True:
                 except:
                     pass
             if tool_name in available_tools:
-                result = available_tools[tool_name]["fn"]() if tool_input is None else available_tools[tool_name]["fn"](tool_input)
+                result = available_tools[tool_name]["fn"](tool_input)
                 messages.append({
                     "role": "assistant",
                     "content": json.dumps({ "step": "observe", "content": result })
