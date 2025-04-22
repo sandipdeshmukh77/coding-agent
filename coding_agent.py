@@ -236,7 +236,7 @@ messages = [
 ]
 
 while True:
-    user_query = input("> ")
+    user_query = input("You -: ")
     messages.append({ "role": "user", "content": user_query })
 
     while True:
@@ -252,7 +252,7 @@ while True:
         step = parsed_output.get("step")
 
         if step == "plan":
-            print(f"ðŸ§ : {parsed_output.get('content')}")
+            # print(f"system -: {parsed_output.get('content')}")
             continue
 
         if step == "action":
@@ -272,5 +272,5 @@ while True:
                 continue
 
         if step == "output":
-            print(f"ðŸ¤–: {parsed_output.get('content')}")
+            print(f"system -: {parsed_output.get('content')}")
             break
