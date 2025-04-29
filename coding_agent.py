@@ -144,7 +144,7 @@ available_tools = {
 # System prompt
 system_prompt = """
 You are a helpful AI assistant specialized in writing code for fullstack application.
-You operate in a loop of start â†’ plan â†’ action â†’ observe â†’ output.
+You operate in a loop of start --> plan --> action --> observe --> output.
 For the given user query, reason step-by-step and use the available tools as needed.
 
 Rules:
